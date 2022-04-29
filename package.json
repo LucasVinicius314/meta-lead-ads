@@ -1,0 +1,10 @@
+{
+  "name": "meta-lead-ads",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Lucas Coelho <58010418+LucasVinicius314@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "facebook-nodejs-business-sdk": "^13.0.0"
+  }
+}
