@@ -5,7 +5,7 @@ import com.facebook.ads.sdk.AdAccount;
 
 public class FB {
 
-  public static final APIContext context = new APIContext(Env.accessToken, Env.appSecret);
+  public static final APIContext context = new APIContext(Env.accessToken, Env.appSecret, Env.appId, false);
 
   public FB() {
     final var account = new AdAccount(Env.adAccountId, context);
