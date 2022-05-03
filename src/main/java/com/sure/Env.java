@@ -9,4 +9,6 @@ public class Env {
   public static final String appId = System.getenv("APP_ID");
 
   public static final String appSecret = System.getenv("APP_SECRET");
+
+  public static final String pageId = System.getenv("PAGE_ID");
 }
