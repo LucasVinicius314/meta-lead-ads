@@ -4,20 +4,21 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import com.facebook.ads.sdk.APIContext;
+import com.facebook.ads.sdk.APIException;
 import com.facebook.ads.sdk.AdAccount;
 import com.facebook.ads.sdk.Page;
 
 public class FB {
 
-  public static final APIContext context = new APIContext(Env.accessToken, Env.appSecret, Env.appId, false);
+  public static final APIContext context = new APIContext(Env.appAccessToken, Env.appSecret, Env.appId, false);
 
   public FB() {
 
-    // campaigns();
+    campaigns();
 
     // createLead();
 
-    leads();
+    // leads();
   }
 
   void campaigns() {
@@ -84,6 +85,27 @@ public class FB {
   }
 
   void leads() {
+
+    final var page = new Page(Env.pageId, context);
+
+    final var token = page.getFieldPageToken();
+    final var token2 = page.getFieldAccessToken();
+
+    final var req = page.getLeadGenForms();
+
+    // new User(id, context);
+
+    // new APIRequestCreateAccessToken(, context)
+
+    // req.
+
+    try {
+      final var forms = req.execute();
+
+      forms.toString();
+    } catch (APIException e) {
+      e.printStackTrace();
+    }
 
     // final var form = new LeadgenForm("test", context);
 
