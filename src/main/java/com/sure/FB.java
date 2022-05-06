@@ -14,7 +14,7 @@ public class FB {
 
   public FB() {
 
-    campaigns();
+    // campaigns();
 
     // createLead();
 

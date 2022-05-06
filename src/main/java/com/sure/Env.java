@@ -2,6 +2,10 @@ package com.sure;
 
 public class Env {
 
+  // Other
+
+  public static final String port = System.getenv("PORT");
+
   // Secrets
 
   public static final String appSecret = System.getenv("APP_SECRET");
