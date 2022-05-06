@@ -18,6 +18,9 @@ public class Env {
   // Client token from the dashboard. Not a secret
   public static final String clientToken = System.getenv("CLIENT_TOKEN");
 
+  // User access token, retrieved from the facebook login flow
+  public static final String userAccessToken = System.getenv("USER_ACCESS_TOKEN");
+
   // Ids
 
   public static final String adAccountId = System.getenv("AD_ACCOUNT_ID");
