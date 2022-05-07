@@ -7,10 +7,23 @@ import com.facebook.ads.sdk.APIContext;
 import com.facebook.ads.sdk.APIException;
 import com.facebook.ads.sdk.AdAccount;
 import com.facebook.ads.sdk.Page;
+import com.facebook.ads.sdk.User;
 
 public class FB {
 
-  public static final APIContext context = new APIContext(Env.appAccessToken, Env.appSecret, Env.appId, false);
+  public static APIContext getAppContext() {
+    return new APIContext(Env.appAccessToken, Env.appSecret, Env.appId, false);
+  };
+
+  public static APIContext getUserContext() {
+    return new APIContext(Env.userAccessToken, Env.appSecret, Env.appId, false);
+  };
+
+  public static APIContext getPageContext() {
+    return new APIContext(Env.pageAccessToken, Env.appSecret, Env.appId, false);
+  };
+
+  public static final APIContext appContext = getAppContext();
 
   public FB() {
 
@@ -18,12 +31,12 @@ public class FB {
 
     // createLead();
 
-    // leads();
+    leads();
   }
 
   void campaigns() {
 
-    final var account = new AdAccount(Env.adAccountId, context);
+    final var account = new AdAccount(Env.adAccountId, appContext);
 
     try {
       final var campaigns = account.getCampaigns().requestAllFields().execute();
@@ -40,7 +53,7 @@ public class FB {
   void createLead() {
     try {
 
-      final var req = new Page(Env.pageId, context).createLeadGenForm();
+      final var req = new Page(Env.pageId, appContext).createLeadGenForm();
 
       req.setName("Test lead");
 
@@ -86,10 +99,28 @@ public class FB {
 
   void leads() {
 
-    final var page = new Page(Env.pageId, context);
+    final var userContext = getUserContext();
 
-    final var token = page.getFieldPageToken();
-    final var token2 = page.getFieldAccessToken();
+    try {
+
+      final var pages2 = User.fetchById(Env.userId, userContext).createAccessToken().execute();
+
+      // final var pages = new User(Env.userId,
+      // appContext).getIdsForPages().execute();
+
+      // System.out.println(
+
+      // pages.toString()
+
+      // );
+
+      "".toString();
+    } catch (APIException e1) {
+      // TODO Auto-generated catch block
+      e1.printStackTrace();
+    }
+
+    final var page = new Page(Env.pageId, userContext);
 
     final var req = page.getLeadGenForms();
 
