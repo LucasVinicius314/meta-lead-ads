@@ -1,7 +1,10 @@
 package com.sure.services;
 
 import com.facebook.ads.sdk.APIContext;
+import com.facebook.ads.sdk.APIException;
+import com.facebook.ads.sdk.APINodeList;
 import com.facebook.ads.sdk.AdAccount;
+import com.facebook.ads.sdk.Campaign;
 import com.sure.Env;
 import com.sure.FacebookSdk;
 
@@ -9,21 +12,12 @@ public class AdAccountService {
 
   final APIContext appContext = FacebookSdk.getAppContext();
 
-  public void campaigns() {
+  final AdAccount adAccount = new AdAccount(Env.adAccountId, appContext);
 
-    final var account = new AdAccount(Env.adAccountId, appContext);
+  public APINodeList<Campaign> getCampaigns() throws APIException {
 
-    try {
+    final var campaigns = adAccount.getCampaigns().requestAllFields().execute();
 
-      final var campaigns = account.getCampaigns().requestAllFields().execute();
-
-      for (final var campaign : campaigns) {
-
-        System.out.println(campaign.getFieldName());
-      }
-    } catch (Exception e) {
-
-      e.printStackTrace();
-    }
+    return campaigns;
   }
 }

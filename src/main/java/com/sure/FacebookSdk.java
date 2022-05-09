@@ -1,6 +1,10 @@
 package com.sure;
 
 import com.facebook.ads.sdk.APIContext;
+import com.facebook.ads.sdk.APIException;
+import com.sure.services.AdAccountService;
+import com.sure.services.LeadgenFormService;
+import com.sure.services.PageService;
 import com.sure.services.UserService;
 
 public class FacebookSdk {
@@ -26,16 +30,100 @@ public class FacebookSdk {
 
   public void setup() {
 
-    // final var adAccountService = new AdAccountService();
+    getCampaigns();
 
-    // adAccountService.campaigns();
+    // createLeadgenForm();
 
-    // final var leadFormService = new LeadFormService();
+    getLeadgenForms();
 
-    // leadFormService.create();
+    getLeads();
+  }
 
-    final var userService = new UserService();
+  void getCampaigns() {
 
-    userService.leads();
+    try {
+
+      final var adAccountService = new AdAccountService();
+
+      final var campaigns = adAccountService.getCampaigns();
+
+      campaigns.toString();
+    } catch (APIException e) {
+
+      e.printStackTrace();
+    }
+  }
+
+  void createLeadgenForm() {
+
+    try {
+
+      final var userService = new UserService();
+
+      final var pages = userService.getPages();
+
+      for (final var page : pages) {
+
+        final var pageService = new PageService(page);
+
+        final var leadgenForm = pageService.createLeadgenForm();
+
+        leadgenForm.toString();
+      }
+    } catch (APIException e) {
+
+      e.printStackTrace();
+    }
+  }
+
+  void getLeadgenForms() {
+
+    try {
+
+      final var userService = new UserService();
+
+      final var pages = userService.getPages();
+
+      for (final var page : pages) {
+
+        final var pageService = new PageService(page);
+
+        final var leadgenForms = pageService.getLeadgenForms();
+
+        leadgenForms.toString();
+      }
+    } catch (APIException e) {
+
+      e.printStackTrace();
+    }
+  }
+
+  void getLeads() {
+
+    try {
+
+      final var userService = new UserService();
+
+      final var pages = userService.getPages();
+
+      for (final var page : pages) {
+
+        final var pageService = new PageService(page);
+
+        final var leadgenForms = pageService.getLeadgenForms();
+
+        for (final var leadgenForm : leadgenForms) {
+
+          final var leadgenFormService = new LeadgenFormService(leadgenForm);
+
+          final var leads = leadgenFormService.getLeads();
+
+          leads.toString();
+        }
+      }
+    } catch (APIException e) {
+
+      e.printStackTrace();
+    }
   }
 }
