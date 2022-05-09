@@ -1,45 +1,22 @@
-package com.sure;
+package com.sure.services;
 
 import java.util.Arrays;
 import java.util.HashMap;
 
 import com.facebook.ads.sdk.APIContext;
-import com.facebook.ads.sdk.AdAccount;
 import com.facebook.ads.sdk.Page;
+import com.sure.Env;
+import com.sure.FacebookSdk;
 
-public class FB {
+public class LeadFormService {
 
-  public static final APIContext context = new APIContext(Env.accessToken, Env.appSecret, Env.appId, false);
+  final APIContext appContext = FacebookSdk.getAppContext();
 
-  public FB() {
-
-    // campaigns();
-
-    // createLead();
-
-    leads();
-  }
-
-  void campaigns() {
-
-    final var account = new AdAccount(Env.adAccountId, context);
+  public void create() {
 
     try {
-      final var campaigns = account.getCampaigns().requestAllFields().execute();
 
-      for (final var campaign : campaigns) {
-        System.out.println(campaign.getFieldName());
-      }
-
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
-
-  void createLead() {
-    try {
-
-      final var req = new Page(Env.pageId, context).createLeadGenForm();
+      final var req = new Page(Env.pageId, appContext).createLeadGenForm();
 
       req.setName("Test lead");
 
@@ -79,20 +56,8 @@ public class FB {
       req.execute();
 
     } catch (Exception e) {
+
       e.printStackTrace();
     }
-  }
-
-  void leads() {
-
-    // final var form = new LeadgenForm("test", context);
-
-    // form.createTestLead();
-
-    // form.
-
-    // final var leads = form.getTestLeads().execute();
-
-    // leads.toString();
   }
 }

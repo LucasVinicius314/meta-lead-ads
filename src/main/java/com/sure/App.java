@@ -2,8 +2,15 @@ package com.sure;
 
 public final class App {
 
-  public static void main(String[] args) {
+  private App() {
+  }
 
-    new FB();
+  public static void main(final String[] args) {
+
+    final var facebookSdk = new FacebookSdk();
+
+    facebookSdk.setup();
+
+    Server.setup();
   }
 }
