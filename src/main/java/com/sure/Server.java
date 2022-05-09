@@ -11,11 +11,14 @@ import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 public class Server {
+
   private Server() {
   }
 
   static public void setup() {
+
     try {
+
       final var server = HttpServer.create(new InetSocketAddress(Integer.parseInt(Env.port)), 0);
 
       server.createContext("/", new RootHandler());
@@ -23,13 +26,16 @@ public class Server {
       server.setExecutor(null);
       server.start();
     } catch (IOException e) {
+
       e.printStackTrace();
     }
   }
 
   static class RootHandler implements HttpHandler {
+
     @Override
     public void handle(HttpExchange t) throws IOException {
+
       final var method = t.getRequestMethod();
       final var uri = t.getRequestURI();
       final var headers = t.getRequestHeaders().entrySet().stream()

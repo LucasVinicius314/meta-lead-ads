@@ -2,6 +2,9 @@ package com.sure;
 
 public class Env {
 
+  private Env() {
+  }
+
   // Other
 
   public static final String port = System.getenv("PORT");
@@ -20,9 +23,6 @@ public class Env {
 
   // User access token, retrieved from the facebook login flow
   public static final String userAccessToken = System.getenv("USER_ACCESS_TOKEN");
-
-  // PAge access token, retrieved from the a user pages call
-  public static final String pageAccessToken = System.getenv("PAGE_ACCESS_TOKEN");
 
   // Ids
 
